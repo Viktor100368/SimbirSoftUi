@@ -35,6 +35,7 @@ public class DeleteCustomerPage extends BasePage {
      * метод получает среднюю длину имен всех Customers
      * и удаляет всех Customer
      * длина имен которых ближе всего к средней
+     *
      * @return возвращает текущую страницу
      */
     public DeleteCustomerPage deletingElement() {
@@ -55,6 +56,7 @@ public class DeleteCustomerPage extends BasePage {
 
     /**
      * вычисляет среднюю длину всех имен
+     *
      * @return возвращает среднюю длнину
      */
     public double getAverageLength() {
@@ -68,6 +70,7 @@ public class DeleteCustomerPage extends BasePage {
     /**
      * метод читает имена клиентов сравнивает длину имени со средней длиной всех имен
      * и заполняет лист на удаление
+     *
      * @param avg среднее значение длин всех имен
      */
     public void readTargetElementForDeleting(double avg) {
@@ -87,8 +90,9 @@ public class DeleteCustomerPage extends BasePage {
     /**
      * метод читает имена всех кастомеров на странице, сравнивает иж со списком
      * кастомеров подлежащих удалению и удаляет при совподению
+     *
      * @param nCustomer лист кастомеров
-     * @param tName лист кастомеров подлежащих удалению
+     * @param tName     лист кастомеров подлежащих удалению
      */
     public void deletingTargetElement(List<WebElement> nCustomer, List<String> tName) {
         for (int i = 0; i < nCustomer.size(); i++) {

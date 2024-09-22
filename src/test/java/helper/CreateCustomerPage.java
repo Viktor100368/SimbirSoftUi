@@ -44,6 +44,7 @@ public class CreateCustomerPage extends BasePage {
 
     /**
      * метод заполняет поля формы и создает пользователя
+     *
      * @return возвращает текущую страницу
      */
     public CreateCustomerPage creatingUser() {
@@ -90,11 +91,12 @@ public class CreateCustomerPage extends BasePage {
     /**
      * метод генеригует строку из символов от a до z, которая используется для инициалиозации
      * поля lastNameField
+     *
      * @return возвращает страку из 7 символов
      */
     public static String generatedString() {
-        int leftLimit = (int)'a';
-        int rightLimit = (int)'z';
+        int leftLimit = (int) 'a';
+        int rightLimit = (int) 'z';
         int stirngLength = 7;
         Random random = new Random();
         String result = random.ints(leftLimit, rightLimit + 1)

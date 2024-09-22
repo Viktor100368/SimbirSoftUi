@@ -27,7 +27,7 @@ public class CustomerTest extends BaseTest {
     @DisplayName("Sorting Customer Test")
     @Description("Проверка функциональности сортировки")
     public void sortingCustomers() {
-        List<String> names =page.startSorting().clickCustomerButton().sortingCustomers();
+        List<String> names = page.startSorting().clickCustomerButton().sortingCustomers();
         Collections.sort(names);
         for (int i = 0; i < names.size(); i++) {
             Assert.assertEquals(names.get(i), SortingCustomersPage.getListName().get(i));
