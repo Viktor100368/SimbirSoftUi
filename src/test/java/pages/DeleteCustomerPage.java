@@ -12,6 +12,7 @@ public class DeleteCustomerPage extends BasePage {
     private List<String> listName = new ArrayList<>();
     private List<String> targetName = new ArrayList<>();
 
+
     public List<String> getTargetName() {
         return targetName;
     }
@@ -96,11 +97,13 @@ public class DeleteCustomerPage extends BasePage {
      */
     public void deletingTargetElement(List<WebElement> nCustomer, List<String> tName) {
         for (int i = 0; i < nCustomer.size(); i++) {
-            for (int k = 0; k < tName.size(); k++)
+            for (int k = 0; k < tName.size(); k++) {
                 if (nCustomer.get(i).getText().equals(tName.get(k))) {
                     deletingButton.get(i).click();
                 }
+            }
         }
     }
+
 
 }

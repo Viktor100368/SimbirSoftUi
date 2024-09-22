@@ -41,7 +41,7 @@ public class CustomerTest extends BaseTest {
     public void deleteCustomerWithAverageValueLength() {
         DeleteCustomerPage delPage = new DeleteCustomerPage();
         page.deleteCustomer().clickForDeleting().deletingElement();
-        Assert.assertTrue(!delPage.getNameCustomers().equals(delPage.getTargetName()));
+        Assert.assertTrue(delPage.getTargetName().size() == 0);
     }
 
 }
