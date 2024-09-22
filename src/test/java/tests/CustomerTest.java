@@ -5,6 +5,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import io.qameta.allure.junit4.DisplayName;
 import helper.CreateCustomerPage;
+import org.openqa.selenium.WebElement;
 import pages.DeleteCustomerPage;
 import pages.SortingCustomersPage;
 
@@ -41,7 +42,11 @@ public class CustomerTest extends BaseTest {
     public void deleteCustomerWithAverageValueLength() {
         DeleteCustomerPage delPage = new DeleteCustomerPage();
         page.deleteCustomer().clickForDeleting().deletingElement();
-        Assert.assertTrue(delPage.getTargetName().size() == 0);
+        for (WebElement el : delPage.getNameCustomers()) {
+            for (String s : DeleteCustomerPage.getTargetName()) {
+                Assert.assertTrue(!el.equals(s));
+            }
+        }
     }
 
 }

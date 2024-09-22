@@ -10,10 +10,9 @@ import java.util.List;
 
 public class DeleteCustomerPage extends BasePage {
     private List<String> listName = new ArrayList<>();
-    private List<String> targetName = new ArrayList<>();
+    private static List<String> targetName = new ArrayList<>();
 
-
-    public List<String> getTargetName() {
+    public static List<String> getTargetName() {
         return targetName;
     }
 
