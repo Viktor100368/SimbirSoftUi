@@ -4,11 +4,11 @@ import io.qameta.allure.Description;
 import org.junit.Assert;
 import org.junit.Test;
 import io.qameta.allure.junit4.DisplayName;
-import pages.CreateCustomerPage;
+import helper.CreateCustomerPage;
 import pages.DeleteCustomerPage;
 import pages.SortingCustomersPage;
 
-import java.util.ArrayList;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -27,8 +27,7 @@ public class CustomerTest extends BaseTest {
     @DisplayName("Sorting Customer Test")
     @Description("Проверка функциональности сортировки")
     public void sortingCustomers() {
-        page.startSorting().clickCustomerButton().sortingCustomers();
-        List<String> names = new ArrayList<>(SortingCustomersPage.getListName());
+        List<String> names =page.startSorting().clickCustomerButton().sortingCustomers();
         Collections.sort(names);
         for (int i = 0; i < names.size(); i++) {
             Assert.assertEquals(names.get(i), SortingCustomersPage.getListName().get(i));

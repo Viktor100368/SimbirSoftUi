@@ -23,12 +23,17 @@ public class SortingCustomersPage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    public SortingCustomersPage sortingCustomers() {
+    /**
+     * метод сортирует клиентов по именам и складывает их в лист.
+     * При первом нажатии на FirstName, сортиравка по уибыванию,
+     * при повторнрм по возрастанию имен, чисто для удоства проверки правильности сортировки
+     */
+    public List<String> sortingCustomers() {
         sortingCustomers.click();
         sortingCustomers.click();
         for (WebElement el : nameCustomers) {
             listName.add(el.getText());
         }
-        return this;
+        return listName;
     }
 }

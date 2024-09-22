@@ -1,8 +1,9 @@
-package pages;
+package helper;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import pages.BasePage;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -41,6 +42,10 @@ public class CreateCustomerPage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
+    /**
+     * метод заполняет поля формы и создает пользователя
+     * @return возвращает текущую страницу
+     */
     public CreateCustomerPage creatingUser() {
         generatePostCode();
         firstNameField.sendKeys(generateFirstName(postCode));
@@ -50,7 +55,6 @@ public class CreateCustomerPage extends BasePage {
         driver.switchTo().alert().accept();
         customerButton.click();
         searchCustomer.sendKeys(result);
-        //addCustomer.click();
         return this;
     }
 
@@ -83,9 +87,14 @@ public class CreateCustomerPage extends BasePage {
         return result;
     }
 
+    /**
+     * метод генеригует строку из символов от a до z, которая используется для инициалиозации
+     * поля lastNameField
+     * @return возвращает страку из 7 символов
+     */
     public static String generatedString() {
-        int leftLimit = 97;
-        int rightLimit = 102;
+        int leftLimit = (int)'a';
+        int rightLimit = (int)'z';
         int stirngLength = 7;
         Random random = new Random();
         String result = random.ints(leftLimit, rightLimit + 1)

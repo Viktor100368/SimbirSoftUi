@@ -31,42 +31,65 @@ public class DeleteCustomerPage extends BasePage {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
     }
 
+    /**
+     * метод получает среднюю длину имен всех Customers
+     * и удаляет всех Customer
+     * длина имен которых ближе всего к средней
+     * @return возвращает текущую страницу
+     */
     public DeleteCustomerPage deletingElement() {
-        getListNameCustomers();
-        double d = getAverageLength();
-        getTargetElementForDeleting(d);
+        readListNameCustomers();
+        double averageLengthName = getAverageLength();
+        readTargetElementForDeleting(averageLengthName);
         deletingTargetElement(nameCustomers, targetName);
         return this;
     }
 
 
-    public void getListNameCustomers() {
+    public void readListNameCustomers() {
+
         for (WebElement el : nameCustomers) {
             listName.add(el.getText());
         }
     }
 
+    /**
+     * вычисляет среднюю длину всех имен
+     * @return возвращает среднюю длнину
+     */
     public double getAverageLength() {
         double avg = listName.stream().map(x -> x.length())
                 .mapToDouble(Integer::doubleValue)
-                .average().orElse(0.0);
+                .average()
+                .orElse(0.0);
         return avg;
     }
 
-    public void getTargetElementForDeleting(double d) {
+    /**
+     * метод читает имена клиентов сравнивает длину имени со средней длиной всех имен
+     * и заполняет лист на удаление
+     * @param avg среднее значение длин всех имен
+     */
+    public void readTargetElementForDeleting(double avg) {
         for (String s : listName) {
-            if (s.length() < d) {
-                if (d - s.length() > 0 && d - s.length() <= 1) {
+            if (s.length() < avg) {
+                if (avg - s.length() > 0 && avg - s.length() <= 1) {
                     targetName.add(s);
                 }
             } else {
-                if (s.length() - d > 0 && s.length() - d <= 1) {
+                if (s.length() - avg > 0 && s.length() - avg <= 1) {
                     targetName.add(s);
                 }
             }
         }
     }
 
+    /**
+     * метод читает имена всех кастомеров на странице, сравнивает иж со списком
+     * кастомеров подлежащих удалению и удаляет при совподению
+     * @param nCustomer лист кастомеров
+     * @param tName лист кастомеров подлежащих удалению
+     */
     public void deletingTargetElement(List<WebElement> nCustomer, List<String> tName) {
         for (int i = 0; i < nCustomer.size(); i++) {
             for (int k = 0; k < tName.size(); k++)
