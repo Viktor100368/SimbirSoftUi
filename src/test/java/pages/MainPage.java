@@ -1,6 +1,6 @@
 package pages;
 
-import helper.CreateCustomerPage;
+import helper.HelpProperties;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -19,61 +19,74 @@ public class MainPage extends BasePage {
     private WebElement customersButton;
 
 
-    public MainPage() {
-
-        driver.get(getProperty(properties, "url"));
+    public MainPage() {//constructor
+        driver.get(HelpProperties.getProperty(properties, "url"));
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(3));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
         PageFactory.initElements(driver, this);
     }
 
-
+    /**
+     * инициализирует создание Customer
+     *
+     * @return текущую страницу, для chainOfInvokes
+     */
     public MainPage startCreatingUsers() {
         clickAddCustomerButton();
         return this;
     }
 
+    /**
+     * инициализирует сортировку
+     *
+     * @return текущую страницу, для chainOfInvokes
+     */
     public MainPage startSorting() {
         addCustomer.click();
         clickCustomerButton();
         return this;
     }
 
+    /**
+     * инициолизирует удаление Customers
+     *
+     * @return текущую страницу, для chainOfInvokes
+     */
     public MainPage deleteCustomer() {
         clickForDeleting();
         return this;
     }
 
 
-    //создание нового Customer
+    /**
+     * создает Customer
+     *
+     * @return страницу создания Customer, chainOfInvokes
+     */
     public CreateCustomerPage clickAddCustomerButton() {
         addCustomer.click();
         return new CreateCustomerPage();
     }
 
-    //сортировка customers
+    /**
+     * сортирует Customers
+     *
+     * @return страницу сортировки, chainOfInvokes
+     */
     public SortingCustomersPage clickCustomerButton() {
         customersButton.click();
         return new SortingCustomersPage();
     }
 
+    /**
+     * удаление target Customers
+     *
+     * @return страинцу удаления, chainOfInvokes
+     */
     public DeleteCustomerPage clickForDeleting() {
         customersButton.click();
         return new DeleteCustomerPage();
     }
 
-    public String getProperty(Properties properties, String key) {
-        String url;
-
-        try (FileInputStream fis = new FileInputStream("./src/test/resources/local.properties")) {
-            properties.load(fis);
-            url = properties.getProperty(key);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return url;
-    }
 
 }

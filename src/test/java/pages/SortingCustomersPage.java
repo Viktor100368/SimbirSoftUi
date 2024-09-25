@@ -19,7 +19,7 @@ public class SortingCustomersPage extends BasePage {
     @FindBy(xpath = "//tr[@class=\"ng-scope\"]/td[1]")
     private List<WebElement> nameCustomers;
 
-    public SortingCustomersPage() {
+    public SortingCustomersPage() {//constructor
         PageFactory.initElements(driver, this);
     }
 

@@ -1,10 +1,12 @@
 package tests;
 
+import helper.HelpCreateCustomer;
+import helper.HelpDeleteCustomer;
 import io.qameta.allure.Description;
 import org.junit.Assert;
 import org.junit.Test;
 import io.qameta.allure.junit4.DisplayName;
-import helper.CreateCustomerPage;
+import pages.CreateCustomerPage;
 import org.openqa.selenium.WebElement;
 import pages.DeleteCustomerPage;
 import pages.SortingCustomersPage;
@@ -20,15 +22,19 @@ public class CustomerTest extends BaseTest {
     @DisplayName("Create New Customer Test")
     @Description("Проверка функциональности создания нового кастомера")
     public void createNewCustomer() {
-        page.startCreatingUsers().clickAddCustomerButton().creatingUser();
-        Assert.assertEquals(CreateCustomerPage.getResult(), CreateCustomerPage.getFindingElement().getText());
+        page.startCreatingUsers()
+                .clickAddCustomerButton()
+                .creatingUser();
+        Assert.assertEquals(HelpCreateCustomer.getResult(), CreateCustomerPage.getFindingElement().getText());
     }
 
     @Test
     @DisplayName("Sorting Customer Test")
     @Description("Проверка функциональности сортировки")
     public void sortingCustomers() {
-        List<String> names = page.startSorting().clickCustomerButton().sortingCustomers();
+        List<String> names = page.startSorting()
+                .clickCustomerButton()
+                .sortingCustomers();
         Collections.sort(names);
         for (int i = 0; i < names.size(); i++) {
             Assert.assertEquals(names.get(i), SortingCustomersPage.getListName().get(i));
@@ -38,12 +44,13 @@ public class CustomerTest extends BaseTest {
     @Test
     @DisplayName("Delete Customer Test")
     @Description("Проверка функциональности удаления кастомера")
-
     public void deleteCustomerWithAverageValueLength() {
         DeleteCustomerPage delPage = new DeleteCustomerPage();
-        page.deleteCustomer().clickForDeleting().deletingElement();
+        page.deleteCustomer()
+                .clickForDeleting()
+                .deletingElement();
         for (WebElement el : delPage.getNameCustomers()) {
-            for (String s : DeleteCustomerPage.getTargetName()) {
+            for (String s : HelpDeleteCustomer.getTargetName()) {
                 Assert.assertTrue(!el.equals(s));
             }
         }
